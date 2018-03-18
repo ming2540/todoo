@@ -1,6 +1,6 @@
 const initial = [
-    { id: 1, text: 'foo' , completed : false},
-    { id: 2, text: 'bar' , completed : false}
+    { id: 1, text: 'foo' , completed : false , removed : false},
+    { id: 2, text: 'bar' , completed : false , removed : false}
 ];
 const todos = (state = initial, action) => {
     switch(action.type){
@@ -17,6 +17,14 @@ const todos = (state = initial, action) => {
                     : t
             )
             break;
+        case 'REMOVE_TODO' :
+            console.log("removing...")
+            return state.map(t=>
+                (t.id === action.id)?
+                    {...t , removed : ! t.removed}
+                    :t
+            )
+
         default:
             return state
     }
